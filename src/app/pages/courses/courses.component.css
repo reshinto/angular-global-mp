@@ -1,8 +1,10 @@
 .coursespage-container {
   height: 82vh;
   padding: 0 10%;
+  padding-bottom: 24px;
   position: relative;
   background-color: #f5f6fa;
+  overflow: auto;
 }
 
 .coursespage-section {

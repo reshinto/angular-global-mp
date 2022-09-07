@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { Course } from "./course";
 
 @Component({
@@ -8,9 +8,23 @@ import { Course } from "./course";
 })
 export class CourseItemComponent implements OnInit {
   @Input()
-  course?: Course;
+  course!: Course;
+  @Output()
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+  onDeleteCourse: EventEmitter<Course> = new EventEmitter();
+  @Output()
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+  onEditCourse: EventEmitter<Course> = new EventEmitter();
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  onDelete(course: Course): void {
+    this.onDeleteCourse.emit(course);
+  }
+
+  onEdit(course: Course): void {
+    this.onEditCourse.emit(course);
+  }
 }
