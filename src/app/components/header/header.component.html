@@ -1,1 +1,17 @@
-<p>header works!</p>
+<div class="header-bg">
+  <div class="header-logo">
+    <app-logo iconName="faCirclePlay" size="2xl"></app-logo>
+    <h1 class="header-title">{{ title | uppercase }}</h1>
+  </div>
+  <div class="header-container">
+    <app-button
+      class="header-button"
+      text="User login"
+      iconName="faUser"></app-button>
+    <app-button
+      class="header-button"
+      text="Log out"
+      rotateLogo="rotate(180deg)"
+      iconName="faLeft"></app-button>
+  </div>
+</div>
