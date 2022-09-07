@@ -12,7 +12,9 @@
     "lint:fix": "ng lint --fix",
     "code:format": "npx prettier --write .",
     "code:clean": "npm run lint:fix; npm run code:format",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "predeploy": "npm run build",
+    "deploy-gh": "gh-pages -b master -d dist/angular-global-mp"
   },
   "lint-staged": {
     "src/**/*.{ts,css,html}": [
@@ -60,6 +62,7 @@
     "eslint": "^8.18.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
+    "gh-pages": "^4.0.0",
     "husky": "^8.0.0",
     "jasmine-core": "~4.3.0",
     "karma": "~6.4.0",
