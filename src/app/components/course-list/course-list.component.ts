@@ -1,4 +1,4 @@
-import { Component, OnInit, DoCheck } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Course } from "../course-item/course";
 import { COURSES } from "./mock-data";
 
@@ -7,7 +7,7 @@ import { COURSES } from "./mock-data";
   templateUrl: "./course-list.component.html",
   styleUrls: ["./course-list.component.css"],
 })
-export class CourseListComponent implements OnInit, DoCheck {
+export class CourseListComponent implements OnInit {
   courses: Course[] = COURSES;
   numOfDisplay: number = 3;
   showLoadMore: boolean = COURSES.length > this.numOfDisplay;
@@ -15,18 +15,14 @@ export class CourseListComponent implements OnInit, DoCheck {
   constructor() {}
 
   ngOnInit(): void {
-    this.filterCourses(this.numOfDisplay);
+    this.filterCourses();
   }
 
-  ngDoCheck(): void {
-    this.filterCourses(this.courses.length);
-  }
-
-  filterCourses(limit: number): void {
+  filterCourses(): void {
     this.courses = COURSES.filter(
       (course: Course, index) => index < this.numOfDisplay,
     );
-    this.showLoadMore = COURSES.length > limit;
+    this.showLoadMore = COURSES.length > this.courses.length;
   }
 
   identify(index: number, item: Course) {
@@ -35,6 +31,7 @@ export class CourseListComponent implements OnInit, DoCheck {
 
   loadMoreCourses(): void {
     this.numOfDisplay += 3;
+    this.filterCourses();
   }
 
   deleteCourse(course: Course): void {
