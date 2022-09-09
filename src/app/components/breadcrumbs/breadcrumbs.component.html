@@ -1,1 +1,5 @@
-<p>breadcrumbs works!</p>
+<div class="breadcrumbs-container" *ngFor="let breadcrumb of breadcrumbs">
+  <a class="breadcrumb-link" routerLink="{{ breadcrumb.path }}">{{
+    breadcrumb.name
+  }}</a>
+</div>

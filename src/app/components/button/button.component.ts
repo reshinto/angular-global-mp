@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, Input } from "@angular/core";
+import { SizeProp } from "@fortawesome/fontawesome-svg-core";
 
 @Component({
   selector: "app-button",
@@ -6,6 +7,17 @@ import { Component, OnInit } from "@angular/core";
   styleUrls: ["./button.component.css"],
 })
 export class ButtonComponent implements OnInit {
+  @Input()
+  text!: string;
+  @Input()
+  iconName!: string;
+  @Input()
+  rotateLogo?: string;
+  @Input()
+  size?: SizeProp = "xs";
+  @Input()
+  showLogo?: boolean = true;
+
   constructor() {}
 
   ngOnInit(): void {}

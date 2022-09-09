@@ -1,1 +1,30 @@
-<p>course-item works!</p>
+<div class="courseitem-container">
+  <section class="courseitem-top">
+    <h2 class="courseitem-top_title">{{ course.title }}</h2>
+    <div class="courseitem-top-datetime">
+      <span class="courseitem-top-datetime_section">
+        <app-logo iconName="faClock"></app-logo>
+        <p class="courseitem-top-datetime_text">{{ course.duration }}</p>
+      </span>
+      <span class="courseitem-top-datetime_section">
+        <app-logo iconName="faCalendar"></app-logo>
+        <p class="courseitem-top-datetime_text">{{ course.creationDate }}</p>
+      </span>
+    </div>
+  </section>
+  <section class="courseitem-bottom">
+    <p class="courseitem-bottom-text">{{ course.description }}</p>
+    <div class="courseitem-bottom-buttons">
+      <app-button
+        class="courseitem-bottom-buttons_button"
+        text="Edit"
+        iconName="faPen"
+        (click)="onEdit(course)"></app-button>
+      <app-button
+        class="courseitem-bottom-buttons_button"
+        text="Delete"
+        iconName="faTrash"
+        (click)="onDelete(course)"></app-button>
+    </div>
+  </section>
+</div>

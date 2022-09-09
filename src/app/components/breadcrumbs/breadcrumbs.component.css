@@ -1,0 +1,17 @@
+.breadcrumbs-container {
+  height: 6vh;
+  display: flex;
+  align-items: center;
+  padding: 0 10%;
+}
+
+.breadcrumb-link {
+  line-height: 24px;
+  letter-spacing: 0;
+  color: #464a5a;
+  font-size: 14px;
+  font-family: "SourceSansPro-Bold";
+  text-transform: none;
+  text-align: left;
+  font-weight: 700;
+}

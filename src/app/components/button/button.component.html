@@ -1,1 +1,11 @@
-<p>button works!</p>
+<button class="button-container">
+  <app-logo
+    *ngIf="showLogo"
+    [ngStyle]="{
+      'transform': rotateLogo,
+      'margin-right': '8px'
+    }"
+    iconName="{{ iconName }}"
+    [size]="size"></app-logo>
+  <p>{{ text }}</p>
+</button>

@@ -1,0 +1,36 @@
+.coursespage-container {
+  height: 82vh;
+  padding: 0 10%;
+  padding-bottom: 24px;
+  position: relative;
+  background-color: #f5f6fa;
+  overflow: auto;
+}
+
+.coursespage-section {
+  position: relative;
+  height: 7vh;
+  padding-top: 21px;
+  margin-bottom: 17px;
+}
+
+.coursespage-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-radius: 3px;
+  background: #009ecc;
+  height: 36px;
+  width: 111px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 24px;
+  letter-spacing: -0.1px;
+  color: #ffffff;
+  font-size: 14px;
+  font-family: "SourceSansPro-Semibold";
+  text-transform: none;
+  text-align: left;
+  font-weight: 600;
+}
