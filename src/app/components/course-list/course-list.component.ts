@@ -1,6 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
 import { Course } from "../course-item/course";
-import { COURSES } from "./mock-data";
 
 @Component({
   selector: "app-course-list",
@@ -8,30 +7,25 @@ import { COURSES } from "./mock-data";
   styleUrls: ["./course-list.component.css"],
 })
 export class CourseListComponent implements OnInit {
-  courses: Course[] = COURSES;
-  numOfDisplay: number = 3;
-  showLoadMore: boolean = COURSES.length > this.numOfDisplay;
+  @Input()
+  appInstance: any;
+
+  @Input()
+  courses!: Course[];
+  @Input()
+  showLoadMore!: boolean;
 
   constructor() {}
 
-  ngOnInit(): void {
-    this.filterCourses();
-  }
-
-  filterCourses(): void {
-    this.courses = COURSES.filter(
-      (course: Course, index) => index < this.numOfDisplay,
-    );
-    this.showLoadMore = COURSES.length > this.courses.length;
-  }
+  ngOnInit(): void {}
 
   identify(index: number, item: Course) {
     return item.id;
   }
 
   loadMoreCourses(): void {
-    this.numOfDisplay += 3;
-    this.filterCourses();
+    this.appInstance.numOfDisplay += 3;
+    this.appInstance.limitCourses();
   }
 
   deleteCourse(course: Course): void {

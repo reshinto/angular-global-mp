@@ -1,11 +1,16 @@
 <div class="coursespage-container">
   <div class="coursespage-section">
-    <app-search></app-search>
+    <app-search
+      (onFilterCourse)="filterCourses($event)"
+      [courses]="courses"></app-search>
     <app-button
       class="coursespage-button"
       text="Add course"
       iconName="faPlus"
       size="1x"></app-button>
   </div>
-  <app-course-list></app-course-list>
+  <app-course-list
+    [appInstance]="this"
+    [courses]="courses"
+    [showLoadMore]="showLoadMore"></app-course-list>
 </div>

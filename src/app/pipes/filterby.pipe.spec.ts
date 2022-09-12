@@ -1,16 +1,13 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { Course } from "../components/course-item/course";
+import { FilterbyPipe } from "./filterby.pipe";
 
-import { CoursesComponent } from "./courses.component";
-
-const d1 = new Date();
-d1.setFullYear(2022, 8, 10);
 const d2 = new Date();
 d2.setFullYear(2022, 7, 10);
 const courses = [
   {
     id: 1,
     title: "video course 1. name tag",
-    creationDate: d1,
+    creationDate: d2,
     duration: 15,
     description:
       "Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.",
@@ -27,39 +24,32 @@ const courses = [
   },
 ];
 
-describe("CoursesComponent", () => {
-  let component: CoursesComponent;
-  let fixture: ComponentFixture<CoursesComponent>;
+describe("FilterbyPipe", () => {
+  const pipe = new FilterbyPipe();
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [CoursesComponent],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(CoursesComponent);
-    component = fixture.componentInstance;
-    component.courses = courses;
-    fixture.detectChanges();
+  it("create an instance", () => {
+    expect(pipe).toBeTruthy();
   });
 
-  it("should create", () => {
-    expect(component).toBeTruthy();
+  it("should transform to empty array", () => {
+    const input = "test";
+    const result: Course[] = [];
+    expect(pipe.transform(courses, input)).toEqual(result);
   });
 
-  it("should filter and return 1 course", () => {
+  it("should transform to only 1 element in array", () => {
+    const input = "2";
     const result = [
       {
-        id: 1,
-        title: "video course 1. name tag",
-        creationDate: d1,
-        duration: 88,
+        id: 2,
+        title: "video course 2. name tag",
+        creationDate: d2,
+        duration: 15,
         description:
           "Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.",
-        topRated: true,
+        topRated: false,
       },
     ];
-    component.filterCourses("1");
-    expect(component.numOfDisplay).toBe(3);
-    expect(component.courses).toEqual(result);
+    expect(pipe.transform(courses, input)).toEqual(result);
   });
 });
