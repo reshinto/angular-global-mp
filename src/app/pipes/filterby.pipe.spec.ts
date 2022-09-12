@@ -37,6 +37,15 @@ describe("FilterbyPipe", () => {
     expect(pipe.transform(courses, input)).toEqual(result);
   });
 
+  it("should return the full array", () => {
+    let input = undefined;
+    const result: Course[] = courses;
+    expect(pipe.transform(courses, input)).toEqual(result);
+
+    input = "";
+    expect(pipe.transform(courses, input)).toEqual(result);
+  });
+
   it("should transform to only 1 element in array", () => {
     const input = "2";
     const result = [
