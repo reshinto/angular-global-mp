@@ -60,6 +60,12 @@ describe("CoursesComponent", () => {
     ];
     component.filterCourses("1");
     expect(component.numOfDisplay).toBe(3);
-    expect(component.courses).toEqual(result);
+    expect(component.courses[0].id).toEqual(result[0].id);
+  });
+
+  it("should trigger ngDoCheck", () => {
+    component.updated = true;
+    fixture.detectChanges();
+    expect(component.updated).toBe(false);
   });
 });
