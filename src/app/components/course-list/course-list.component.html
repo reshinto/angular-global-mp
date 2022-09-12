@@ -1,11 +1,18 @@
 <div
-  *ngFor="let course of courses; trackBy: identify"
+  *ngFor="let course of courses | orderBy: 'creationDate'; trackBy: identify"
   class="courselist-container">
   <app-course-item
     [course]="course"
     (onDeleteCourse)="deleteCourse(course)"
     (onEditCourse)="editCourse(course)"></app-course-item>
 </div>
-<div *ngIf="showLoadMore" class="courselist-loadmore">
-  <a class="courselist-loadmore_text" (click)="loadMoreCourses()">load more</a>
+<div *ngIf="showLoadMore" class="courselist-itemcontainer">
+  <a class="courselist-itemcontainer_loadmoretext" (click)="loadMoreCourses()"
+    >load more</a
+  >
+</div>
+<div *ngIf="courses.length === 0" class="courselist-itemcontainer">
+  <a class="courselist-itemcontainer_addcoursetext"
+    >NO DATA. FEEL FREE TO ADD NEW COURSE</a
+  >
 </div>

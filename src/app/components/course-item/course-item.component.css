@@ -85,3 +85,7 @@
   padding: 9px;
   margin-left: 12px;
 }
+
+.courseitem-topratedbg {
+  background-color: lightgray;
+}

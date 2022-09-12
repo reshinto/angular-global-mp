@@ -1,13 +1,18 @@
 import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { DurationPipe } from "src/app/pipes/duration.pipe";
 
 import { CourseItemComponent } from "./course-item.component";
+
+const d1 = new Date();
+d1.setFullYear(2022, 8, 10);
 
 const initialProps = {
   id: 1,
   title: "test",
-  creationDate: "12082022",
-  duration: "60",
+  creationDate: d1,
+  duration: 88,
   description: "abc",
+  topRated: false,
 };
 
 describe("CourseItemComponent", () => {
@@ -16,7 +21,7 @@ describe("CourseItemComponent", () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [CourseItemComponent],
+      declarations: [CourseItemComponent, DurationPipe],
     }).compileComponents();
 
     fixture = TestBed.createComponent(CourseItemComponent);
@@ -32,7 +37,9 @@ describe("CourseItemComponent", () => {
   it("should contain default course content in html", () => {
     const compiled = fixture.nativeElement as HTMLElement;
     expect(
-      compiled.querySelector(".courseitem-top_title")?.textContent,
+      compiled
+        .querySelector(".courseitem-top_title")
+        ?.textContent?.toLowerCase(),
     ).toContain("test");
   });
 

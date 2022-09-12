@@ -3,6 +3,7 @@ import {
   IconDefinition,
   faUser,
   faRightFromBracket,
+  faStar,
 } from "@fortawesome/free-solid-svg-icons";
 import {
   faCirclePlay,
@@ -27,6 +28,7 @@ const supportedIcons: SupportedIcon = {
   "faCalendar": faCalendar,
   "faPen": faPenToSquare,
   "faTrash": faTrashCan,
+  "faStar": faStar,
 };
 
 @Component({

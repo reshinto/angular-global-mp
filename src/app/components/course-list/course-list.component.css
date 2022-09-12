@@ -1,4 +1,4 @@
-.courselist-loadmore {
+.courselist-itemcontainer {
   border-radius: 6px;
   background: #ffffff;
   box-shadow: 0 1px 2px 0 rgba(29, 30, 38, 0.1),
@@ -9,7 +9,7 @@
   align-items: center;
 }
 
-.courselist-loadmore_text {
+.courselist-itemcontainer_loadmoretext {
   line-height: 24px;
   letter-spacing: 0;
   color: #5681ee;
@@ -18,4 +18,13 @@
   text-transform: none;
   text-align: left;
   text-decoration: underline;
+}
+
+.courselist-itemcontainer_addcoursetext {
+  line-height: 24px;
+  letter-spacing: 0;
+  font-size: 12px;
+  font-family: "SourceSansPro-Regular";
+  text-transform: none;
+  text-align: left;
 }
