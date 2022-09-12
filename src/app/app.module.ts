@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
+import { FormsModule } from "@angular/forms";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
 
 import { AppRoutingModule } from "./app-routing.module";
@@ -13,6 +14,10 @@ import { HeaderComponent } from "./components/header/header.component";
 import { LogoComponent } from "./components/logo/logo.component";
 import { SearchComponent } from "./components/search/search.component";
 import { CoursesComponent } from "./pages/courses/courses.component";
+import { CourseborderDirective } from "./directives/courseborder.directive";
+import { DurationPipe } from "./pipes/duration.pipe";
+import { OrderbyPipe } from "./pipes/orderby.pipe";
+import { FilterbyPipe } from "./pipes/filterby.pipe";
 
 @NgModule({
   declarations: [
@@ -26,8 +31,12 @@ import { CoursesComponent } from "./pages/courses/courses.component";
     LogoComponent,
     SearchComponent,
     CoursesComponent,
+    CourseborderDirective,
+    DurationPipe,
+    OrderbyPipe,
+    FilterbyPipe,
   ],
-  imports: [BrowserModule, AppRoutingModule, FontAwesomeModule],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, FontAwesomeModule],
   providers: [],
   bootstrap: [AppComponent],
 })
