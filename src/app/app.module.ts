@@ -18,6 +18,7 @@ import { CourseborderDirective } from "./directives/courseborder.directive";
 import { DurationPipe } from "./pipes/duration.pipe";
 import { OrderbyPipe } from "./pipes/orderby.pipe";
 import { FilterbyPipe } from "./pipes/filterby.pipe";
+import { LoginComponent } from "./pages/login/login.component";
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { FilterbyPipe } from "./pipes/filterby.pipe";
     DurationPipe,
     OrderbyPipe,
     FilterbyPipe,
+    LoginComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, FontAwesomeModule],
   providers: [],

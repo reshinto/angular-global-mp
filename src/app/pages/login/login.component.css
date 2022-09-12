@@ -1,0 +1,139 @@
+.login-container {
+  height: 82vh;
+  padding: 0 10%;
+  position: relative;
+  background-color: #f5f6fa;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  border-radius: 6px;
+  background: #ffffff;
+  box-shadow: 0 1px 2px 0 rgba(29, 30, 38, 0.1),
+    0 2px 10px 0 rgba(29, 30, 38, 0.15);
+  height: 311px;
+  width: 368px;
+  padding: 24px;
+  margin-top: -6vh;
+}
+
+.login-controls {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.login-form_headercontainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.login-form_labelcontainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.login-form_title {
+  color: #333333;
+  font-size: 24px;
+  font-family: "SourceSansPro-Semibold";
+  text-transform: none;
+  text-align: left;
+  font-weight: 600;
+}
+
+.login-form_error {
+  line-height: 24px;
+  letter-spacing: 0;
+  color: #ff4e33;
+  font-size: 12px;
+  font-family: "SourceSansPro-Regular";
+  text-transform: none;
+  text-align: left;
+}
+
+.login-form_label {
+  line-height: 24px;
+  letter-spacing: 0;
+  color: #474a59;
+  font-size: 14px;
+  font-family: "SourceSansPro-Semibold";
+  text-transform: none;
+  text-align: left;
+  font-weight: 600;
+}
+
+.login-form_required {
+  line-height: 24px;
+  letter-spacing: 0;
+  color: #474a59;
+  font-size: 12px;
+  font-family: "SourceSansPro-Regular";
+  text-transform: none;
+  text-align: left;
+}
+
+.login-form_inputcontainer {
+  border-radius: 3px;
+  border: 1px solid #ced0db;
+  background: #ffffff;
+  box-sizing: border-box;
+  border-color: #ced0db;
+  border-width: 1px;
+  border-style: solid;
+  height: 36px;
+  width: 320px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.login-form_input {
+  line-height: 18px;
+  letter-spacing: 0;
+  color: #acafbf;
+  font-size: 14px;
+  font-family: "SourceSansPro-Regular";
+  text-transform: none;
+  text-align: left;
+  height: 18px;
+  width: 296px;
+  border: 0;
+}
+.login-form_input:focus {
+  outline: none;
+}
+
+.login-form_forgotpw {
+  line-height: 24px;
+  letter-spacing: 0;
+  color: #5681ee;
+  font-size: 12px;
+  font-family: "SourceSansPro-Regular";
+  text-transform: none;
+  text-align: left;
+  text-decoration: single;
+  cursor: pointer;
+}
+
+.login-form_button {
+  margin: 12px 0;
+  border-radius: 3px;
+  background: #e1e3eb;
+  height: 36px;
+  width: 79px;
+  border: 0;
+  font-size: 14px;
+  font-family: "SourceSansPro-Semibold";
+  cursor: pointer;
+}

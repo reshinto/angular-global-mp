@@ -1,4 +1,5 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, DoCheck, OnInit } from "@angular/core";
+import { AuthService } from "src/app/services/auth.service";
 
 type BreadcrumbLinks = {
   name: string;
@@ -17,10 +18,17 @@ const BREADCRUMB_LINKS: BreadcrumbLinks[] = [
   templateUrl: "./breadcrumbs.component.html",
   styleUrls: ["./breadcrumbs.component.css"],
 })
-export class BreadcrumbsComponent implements OnInit {
+export class BreadcrumbsComponent implements OnInit, DoCheck {
   breadcrumbs: BreadcrumbLinks[] = BREADCRUMB_LINKS;
+  isAuthenticated: boolean = false;
 
-  constructor() {}
+  constructor(private authService: AuthService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.isAuthenticated = this.authService.isAuthenticated;
+  }
+
+  ngDoCheck(): void {
+    this.isAuthenticated = this.authService.isAuthenticated;
+  }
 }
