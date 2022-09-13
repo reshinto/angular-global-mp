@@ -8,7 +8,7 @@ describe("DurationPipe", () => {
 
   it("should transform to hours and mins", () => {
     const input = 88;
-    const result = "1h 87min";
+    const result = "1h 28min";
     expect(pipe.transform(input)).toBe(result);
   });
 
