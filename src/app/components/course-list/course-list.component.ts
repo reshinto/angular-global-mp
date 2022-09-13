@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { CourseService } from "src/app/services/course.service";
 import { Course } from "../course-item/course";
 
 @Component({
@@ -15,7 +16,7 @@ export class CourseListComponent implements OnInit {
   @Input()
   showLoadMore!: boolean;
 
-  constructor() {}
+  constructor(private courseService: CourseService) {}
 
   ngOnInit(): void {}
 
@@ -29,7 +30,14 @@ export class CourseListComponent implements OnInit {
   }
 
   deleteCourse(course: Course): void {
-    console.log("delete", course);
+    const confirmation = window.confirm(
+      "Do you really want to delete this course?",
+    );
+    if (confirmation) {
+      this.courseService.removeCourse(course);
+      this.appInstance.updated = true;
+      console.log("delete", course);
+    }
   }
 
   editCourse(course: Course): void {

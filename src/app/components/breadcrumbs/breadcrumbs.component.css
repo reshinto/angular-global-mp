@@ -15,3 +15,8 @@
   text-align: left;
   font-weight: 700;
 }
+
+.breadcrumbs-hidden {
+  height: 6vh;
+  background-color: #f5f6fa;
+}

@@ -3,7 +3,7 @@
     <app-logo iconName="faCirclePlay" size="2xl"></app-logo>
     <h1 class="header-title">{{ title | uppercase }}</h1>
   </div>
-  <div class="header-container">
+  <div *ngIf="isAuthenticated" class="header-container">
     <app-button
       class="header-button"
       text="User login"

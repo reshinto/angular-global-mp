@@ -7,7 +7,7 @@ import { Course } from "../components/course-item/course";
 export class FilterbyPipe implements PipeTransform {
   transform(
     courses: Course[],
-    value: string = "",
+    value: string | undefined = "",
     ...args: unknown[]
   ): Course[] {
     return courses.filter((course: Course) =>

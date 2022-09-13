@@ -48,7 +48,12 @@ describe("CourseListComponent", () => {
 
   it("should test for deleteCourse console output", () => {
     console.log = jasmine.createSpy("log");
+    spyOn(window, "confirm").and.returnValue(true);
     component.deleteCourse(courseProps);
+    expect(window.confirm).toHaveBeenCalledWith(
+      "Do you really want to delete this course?",
+    );
+
     expect(console.log).toHaveBeenCalled();
   });
 

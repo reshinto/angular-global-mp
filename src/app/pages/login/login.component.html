@@ -1,0 +1,34 @@
+<div class="login-container">
+  <form class="login-form" (ngSubmit)="onSubmit()">
+    <span class="login-form_headercontainer">
+      <h2 class="login-form_title">Login</h2>
+      <p *ngIf="hasError" class="login-form_error">Wrong e-mail or password</p>
+    </span>
+    <span class="login-form_labelcontainer">
+      <label class="login-form_label">E-mail:</label>
+      <p class="login-form_required">*required</p>
+    </span>
+    <div class="login-form_inputcontainer">
+      <input
+        class="login-form_input"
+        name="email"
+        type="email"
+        placeholder="Enter e-mail" />
+    </div>
+    <span class="login-form_labelcontainer">
+      <label class="login-form_label">Password:</label>
+      <p class="login-form_required">*required</p>
+    </span>
+    <div class="login-form_inputcontainer">
+      <input
+        class="login-form_input"
+        name="password"
+        type="password"
+        placeholder="Enter password" />
+    </div>
+    <div class="login-controls">
+      <p class="login-form_forgotpw">Forgot password?</p>
+      <input class="login-form_button" type="submit" value="Login" />
+    </div>
+  </form>
+</div>

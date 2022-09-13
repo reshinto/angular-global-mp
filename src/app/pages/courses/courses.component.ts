@@ -1,7 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, DoCheck, OnInit } from "@angular/core";
 import { Course } from "src/app/components/course-item/course";
-import { COURSES } from "src/app/components/course-list/mock-data";
 import { FilterbyPipe } from "src/app/pipes/filterby.pipe";
+import { CourseService } from "src/app/services/course.service";
 
 @Component({
   selector: "app-courses",
@@ -9,23 +9,43 @@ import { FilterbyPipe } from "src/app/pipes/filterby.pipe";
   styleUrls: ["./courses.component.css"],
   providers: [FilterbyPipe],
 })
-export class CoursesComponent implements OnInit {
-  courses: Course[] = COURSES;
-  originalCourses: Course[] = COURSES;
+export class CoursesComponent implements OnInit, DoCheck {
+  courses!: Course[];
+  originalCourses!: Course[];
   numOfDisplay: number = 3;
   showLoadMore!: boolean;
+  updated: boolean = false;
 
-  constructor(private filterbycourses: FilterbyPipe) {
+  constructor(
+    private filterbycourses: FilterbyPipe,
+    private courseService: CourseService,
+  ) {
     this.numOfDisplay = 3;
   }
 
   ngOnInit(): void {
-    this.showLoadMore = COURSES.length > this.numOfDisplay;
+    this.formatDisplay();
+  }
+
+  ngDoCheck(): void {
+    if (this.updated) {
+      this.formatDisplay();
+      this.updated = false;
+    }
+  }
+
+  formatDisplay(): void {
+    this.courses = this.courseService.getCourses();
+    this.originalCourses = this.courses;
+    this.showLoadMore = this.courses.length > this.numOfDisplay;
     this.limitCourses();
   }
 
   filterCourses(text: string) {
-    this.courses = this.filterbycourses.transform(COURSES, text);
+    this.courses = this.filterbycourses.transform(
+      this.courseService.getCourses(),
+      text,
+    );
     this.originalCourses = this.courses;
     this.numOfDisplay = 3;
     this.limitCourses();
