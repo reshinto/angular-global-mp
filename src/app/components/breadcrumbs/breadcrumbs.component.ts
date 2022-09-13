@@ -1,4 +1,5 @@
 import { Component, DoCheck, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
 
 type BreadcrumbLinks = {
@@ -6,12 +7,25 @@ type BreadcrumbLinks = {
   path: string;
 };
 
-const BREADCRUMB_LINKS: BreadcrumbLinks[] = [
-  {
-    name: "Courses",
-    path: "/courses",
-  },
-];
+const coursesPath: BreadcrumbLinks = {
+  name: "courses",
+  path: "/courses",
+};
+
+const newCoursePath: BreadcrumbLinks = {
+  name: "new course",
+  path: "/new-course",
+};
+
+type BreadcrumbMap = {
+  [k: string]: [] | BreadcrumbLinks[];
+};
+
+const BREADCRUMBS: BreadcrumbMap = {
+  "/": [],
+  "/courses": [coursesPath],
+  "/new-course": [coursesPath, newCoursePath],
+};
 
 @Component({
   selector: "app-breadcrumbs",
@@ -19,16 +33,18 @@ const BREADCRUMB_LINKS: BreadcrumbLinks[] = [
   styleUrls: ["./breadcrumbs.component.css"],
 })
 export class BreadcrumbsComponent implements OnInit, DoCheck {
-  breadcrumbs: BreadcrumbLinks[] = BREADCRUMB_LINKS;
+  breadcrumbs!: BreadcrumbLinks[];
   isAuthenticated: boolean = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.isAuthenticated = this.authService.isAuthenticated;
+    this.breadcrumbs = BREADCRUMBS[this.router.url] as BreadcrumbLinks[];
   }
 
   ngDoCheck(): void {
     this.isAuthenticated = this.authService.isAuthenticated;
+    this.breadcrumbs = BREADCRUMBS[this.router.url] as BreadcrumbLinks[];
   }
 }

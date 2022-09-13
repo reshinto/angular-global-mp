@@ -5,15 +5,29 @@
   padding: 0 10%;
 }
 
+.breadcrumb-linkcontainer {
+  display: flex;
+  align-items: center;
+}
+
+.breadcrumb-link_separator {
+  margin: 0 3px;
+  color: #3cbbde;
+}
+
 .breadcrumb-link {
   line-height: 24px;
   letter-spacing: 0;
-  color: #464a5a;
+  color: #868a96;
   font-size: 14px;
   font-family: "SourceSansPro-Bold";
   text-transform: none;
   text-align: left;
   font-weight: 700;
+}
+
+.breadcrumb-link_focus {
+  color: #464a5a;
 }
 
 .breadcrumbs-hidden {
