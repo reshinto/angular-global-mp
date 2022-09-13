@@ -1,0 +1,166 @@
+.course-container {
+  height: 82vh;
+  padding: 0 10%;
+  padding-bottom: 24px;
+  position: relative;
+  background-color: #f5f6fa;
+  overflow: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.course-form {
+  border-radius: 6px;
+  background: #ffffff;
+  box-shadow: 0 1px 2px 0 rgba(29, 30, 38, 0.1),
+    0 2px 10px 0 rgba(29, 30, 38, 0.15);
+  height: 636px;
+  width: 730px;
+  padding: 24px;
+}
+
+.course-form_pagetitle {
+  color: #333333;
+  font-size: 24px;
+  font-family: "SourceSansPro-Semibold";
+  text-transform: none;
+  text-align: left;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+
+.course-form_fullwidth {
+  width: 100%;
+}
+
+.course-form_labelcontainer {
+  margin-top: 12px;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.course-form_label {
+  line-height: 24px;
+  letter-spacing: 0;
+  color: #474a59;
+  font-size: 14px;
+  font-family: "SourceSansPro-Semibold";
+  text-transform: none;
+  text-align: left;
+  font-weight: 600;
+}
+
+.course-form_required {
+  line-height: 24px;
+  letter-spacing: 0;
+  color: #474a59;
+  font-size: 12px;
+  font-family: "SourceSansPro-Regular";
+  text-transform: none;
+  text-align: left;
+}
+
+.course-form_titlecontainer {
+  border-radius: 3px;
+  border: 1px solid #ced0db;
+  background: #ffffff;
+  box-sizing: border-box;
+  border-color: #ced0db;
+  border-width: 1px;
+  border-style: solid;
+  height: 36px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 5px;
+}
+
+.course-form_input {
+  line-height: 18px;
+  letter-spacing: 0;
+  color: #acafbf;
+  font-size: 14px;
+  font-family: "SourceSansPro-Regular";
+  text-transform: none;
+  text-align: left;
+  height: 18px;
+  width: 100%;
+  border: 0;
+}
+.course-form_input:focus {
+  outline: none;
+}
+
+.course-form_descriptioninput {
+  line-height: 18px;
+  letter-spacing: 0;
+  color: #acafbf;
+  font-size: 14px;
+  font-family: "SourceSansPro-Regular";
+  text-transform: none;
+  text-align: left;
+  border-radius: 3px;
+  border: 1px solid #ced0db;
+  background: #ffffff;
+  box-sizing: border-box;
+  border-color: #ced0db;
+  border-width: 1px;
+  border-style: solid;
+  height: 108px;
+  width: 100%;
+}
+
+.course-form_descriptioninput:focus {
+  outline: none;
+}
+
+.course-form_shortwidth {
+  width: 150px;
+}
+
+.course-form_middlewidth {
+  width: 312px;
+}
+
+.course-controls {
+  margin-top: 29px;
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+}
+
+.course-form_button {
+  border-radius: 3px;
+  background: #67a300;
+  height: 36px;
+  width: 64px;
+  line-height: 30px;
+  letter-spacing: -0.08px;
+  color: #ffffff;
+  font-size: 14px;
+  font-family: "SourceSansPro-Semibold";
+  text-transform: none;
+  text-align: left;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 0;
+  margin-left: 12px;
+  cursor: pointer;
+}
+
+.course-form_durationdisplay {
+  position: relative;
+}
+
+.course-form_durationtext {
+  position: absolute;
+  left: 0;
+  margin-left: 160px;
+  width: max-content;
+}
