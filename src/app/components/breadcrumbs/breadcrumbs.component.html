@@ -1,8 +1,16 @@
-<div *ngIf="isAuthenticated">
-  <div class="breadcrumbs-container" *ngFor="let breadcrumb of breadcrumbs">
-    <a class="breadcrumb-link" routerLink="{{ breadcrumb.path }}">{{
-      breadcrumb.name
-    }}</a>
+<div *ngIf="isAuthenticated" class="breadcrumbs-container">
+  <div
+    class="breadcrumb-linkcontainer"
+    *ngFor="let breadcrumb of breadcrumbs; let index = index">
+    <p class="breadcrumb-link_separator" *ngIf="index > 0">/</p>
+    <a
+      class="breadcrumb-link"
+      [ngClass]="
+        index === breadcrumbs.length - 1 ? 'breadcrumb-link_focus' : ''
+      "
+      routerLink="{{ breadcrumb.path }}"
+      >{{ breadcrumb.name | titlecase }}</a
+    >
   </div>
 </div>
 <div *ngIf="!isAuthenticated" class="breadcrumbs-hidden"></div>

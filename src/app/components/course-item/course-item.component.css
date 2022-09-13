@@ -47,6 +47,7 @@
 
 .courseitem-bottom {
   display: flex;
+  justify-content: space-between;
 }
 
 .courseitem-bottom-text {
@@ -64,26 +65,6 @@
   display: flex;
   justify-content: flex-end;
   margin-left: 35px;
-}
-
-.courseitem-bottom-buttons_button {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  border-radius: 3px;
-  background: #009ecc;
-  height: 24px;
-  width: 60px;
-  line-height: 12px;
-  letter-spacing: -0.1px;
-  color: #ffffff;
-  font-size: 12px;
-  font-family: "SourceSansPro-Semibold";
-  text-transform: none;
-  text-align: left;
-  font-weight: 600;
-  padding: 9px;
-  margin-left: 12px;
 }
 
 .courseitem-topratedbg {

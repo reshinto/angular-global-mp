@@ -1,0 +1,89 @@
+<div class="course-container">
+  <form class="course-form" (ngSubmit)="onSubmit()">
+    <h2 class="course-form_pagetitle">{{ pageTitle }}</h2>
+    <div class="course-form_fullwidth">
+      <span class="course-form_labelcontainer">
+        <label class="course-form_label">Title:</label>
+        <p class="course-form_required">*required</p>
+      </span>
+      <div class="course-form_titlecontainer">
+        <input
+          class="course-form_input"
+          name="title"
+          [(ngModel)]="title"
+          type="text"
+          placeholder="Text input" />
+      </div>
+    </div>
+    <div class="course-form_fullwidth">
+      <span class="course-form_labelcontainer">
+        <label class="course-form_label">Description:</label>
+        <p class="course-form_required">*required</p>
+      </span>
+      <textarea
+        class="course-form_descriptioninput"
+        name="description"
+        type="text"
+        [(ngModel)]="description"
+        placeholder="Add description">
+      </textarea>
+    </div>
+    <div class="course-form_shortwidth">
+      <span class="course-form_labelcontainer">
+        <label class="course-form_label">Duration:</label>
+        <p class="course-form_required">*required</p>
+      </span>
+      <div
+        [ngClass]="[
+          'course-form_titlecontainer',
+          'course-form_durationdisplay'
+        ]">
+        <input
+          class="course-form_input"
+          name="duration"
+          type="number"
+          min="0"
+          [(ngModel)]="duration"
+          placeholder="minutes" />
+        <p class="course-form_durationtext">{{ duration | duration }}</p>
+      </div>
+    </div>
+    <div class="course-form_shortwidth">
+      <span class="course-form_labelcontainer">
+        <label class="course-form_label">Date:</label>
+        <p class="course-form_required">*required</p>
+      </span>
+      <div class="course-form_titlecontainer">
+        <input
+          class="course-form_input"
+          name="date"
+          type="date"
+          [(ngModel)]="date"
+          placeholder="MM/DD/YYYY" />
+      </div>
+    </div>
+    <div class="course-form_middlewidth">
+      <span class="course-form_labelcontainer">
+        <label class="course-form_label">Authors:</label>
+        <p class="course-form_required">*required</p>
+      </span>
+      <div class="course-form_titlecontainer">
+        <input
+          class="course-form_input"
+          name="authors"
+          type="text"
+          [(ngModel)]="authors"
+          placeholder="Start typing" />
+      </div>
+    </div>
+    <div class="course-controls">
+      <app-button
+        (onCustomClick)="cancel()"
+        btnStyle="coursepage-button_cancel"
+        text="Cancel"
+        [showLogo]="false"
+        size="1x"></app-button>
+      <input class="course-form_button" type="submit" value="Save" />
+    </div>
+  </form>
+</div>

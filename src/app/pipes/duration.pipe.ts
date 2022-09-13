@@ -17,6 +17,6 @@ export class DurationPipe implements PipeTransform {
   }
 
   getMins(duration: number): number {
-    return duration - this.getHours(duration);
+    return duration - this.getHours(duration) * this.MIN_TO_HR;
   }
 }

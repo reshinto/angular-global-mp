@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from "@angular/core";
+import { Component, OnInit, Input, Output, EventEmitter } from "@angular/core";
 import { SizeProp } from "@fortawesome/fontawesome-svg-core";
 
 @Component({
@@ -17,8 +17,17 @@ export class ButtonComponent implements OnInit {
   size?: SizeProp = "xs";
   @Input()
   showLogo?: boolean = true;
+  @Input()
+  btnStyle!: string;
+  @Output()
+  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
+  onCustomClick: EventEmitter<any> = new EventEmitter();
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  onClick(): void {
+    this.onCustomClick.emit();
+  }
 }

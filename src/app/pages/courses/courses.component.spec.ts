@@ -68,4 +68,11 @@ describe("CoursesComponent", () => {
     fixture.detectChanges();
     expect(component.updated).toBe(false);
   });
+
+  it("should navigate to new-course page", () => {
+    spyOn(component.router, "navigate");
+
+    component.addCourse();
+    expect(component.router.navigate).toHaveBeenCalledWith(["/new-course"]);
+  });
 });

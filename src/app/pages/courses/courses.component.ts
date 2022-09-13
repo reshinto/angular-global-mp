@@ -1,4 +1,5 @@
 import { Component, DoCheck, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { Course } from "src/app/components/course-item/course";
 import { FilterbyPipe } from "src/app/pipes/filterby.pipe";
 import { CourseService } from "src/app/services/course.service";
@@ -19,6 +20,7 @@ export class CoursesComponent implements OnInit, DoCheck {
   constructor(
     private filterbycourses: FilterbyPipe,
     private courseService: CourseService,
+    public router: Router,
   ) {
     this.numOfDisplay = 3;
   }
@@ -56,5 +58,9 @@ export class CoursesComponent implements OnInit, DoCheck {
       (course: Course, index) => index < this.numOfDisplay,
     );
     this.showLoadMore = this.originalCourses.length > this.courses.length;
+  }
+
+  addCourse(): void {
+    this.router.navigate(["/new-course"]);
   }
 }
