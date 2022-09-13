@@ -24,17 +24,21 @@ export class CoursesComponent implements OnInit, DoCheck {
   }
 
   ngOnInit(): void {
-    this.courses = this.courseService.getCourses();
-    this.originalCourses = this.courses;
-    this.showLoadMore = this.courses.length > this.numOfDisplay;
-    this.limitCourses();
+    this.formatDisplay();
   }
 
   ngDoCheck(): void {
     if (this.updated) {
-      this.courses = this.courseService.getCourses();
+      this.formatDisplay();
       this.updated = false;
     }
+  }
+
+  formatDisplay(): void {
+    this.courses = this.courseService.getCourses();
+    this.originalCourses = this.courses;
+    this.showLoadMore = this.courses.length > this.numOfDisplay;
+    this.limitCourses();
   }
 
   filterCourses(text: string) {
