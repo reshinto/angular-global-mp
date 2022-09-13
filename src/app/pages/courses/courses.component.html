@@ -4,7 +4,8 @@
       (onFilterCourse)="filterCourses($event)"
       [courses]="courses"></app-search>
     <app-button
-      class="coursespage-button"
+      (onCustomClick)="addCourse()"
+      btnStyle="coursespage-button"
       text="Add course"
       iconName="faPlus"
       size="1x"></app-button>
