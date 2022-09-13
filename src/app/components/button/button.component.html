@@ -1,4 +1,4 @@
-<button class="button-container">
+<button [ngClass]="btnStyle" class="button-container" (click)="onClick()">
   <app-logo
     *ngIf="showLogo"
     [ngStyle]="{

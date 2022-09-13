@@ -3,3 +3,59 @@
   justify-content: center;
   align-items: center;
 }
+
+.coursespage-button {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-radius: 3px;
+  background: #009ecc;
+  height: 36px;
+  width: 111px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  line-height: 24px;
+  letter-spacing: -0.1px;
+  color: #ffffff;
+  font-size: 14px;
+  font-family: "SourceSansPro-Semibold";
+  text-transform: none;
+  text-align: left;
+  font-weight: 600;
+}
+
+.courseitem-bottom-buttons_button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  background: #009ecc;
+  height: 24px;
+  width: 60px;
+  line-height: 12px;
+  letter-spacing: -0.1px;
+  color: #ffffff;
+  font-size: 12px;
+  font-family: "SourceSansPro-Semibold";
+  text-transform: none;
+  text-align: left;
+  font-weight: 600;
+  padding: 9px;
+  margin-left: 12px;
+}
+
+.coursepage-button_cancel {
+  border-radius: 3px;
+  background: rgba(18, 21, 35, 0.2);
+  height: 36px;
+  width: 76px;
+  line-height: 30px;
+  letter-spacing: -0.08px;
+  color: #5b616f;
+  font-size: 14px;
+  font-family: "SourceSansPro-Semibold";
+  text-transform: none;
+  text-align: left;
+  font-weight: 600;
+}
