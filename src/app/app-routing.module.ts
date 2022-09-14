@@ -1,8 +1,6 @@
 import { NgModule } from "@angular/core";
 import { RouterModule, Routes } from "@angular/router";
-import { CoursesComponent } from "./pages/courses/courses.component";
 import { LoginComponent } from "./pages/login/login.component";
-import { CourseComponent } from "./pages/course/course.component";
 import { NotFoundComponent } from "./pages/not-found/not-found.component";
 import { AuthGuard } from "./guards/auth.guard";
 
@@ -12,20 +10,8 @@ const routes: Routes = [
   {
     path: "courses",
     canActivate: [AuthGuard],
-    children: [
-      {
-        path: "",
-        component: CoursesComponent,
-      },
-      {
-        path: ":id",
-        component: CourseComponent,
-      },
-      {
-        path: "new",
-        component: CourseComponent,
-      },
-    ],
+    loadChildren: () =>
+      import("./modules/courses.module").then(mod => mod.CoursesModule),
   },
   { path: "404", component: NotFoundComponent },
   { path: "**", redirectTo: "404" },
