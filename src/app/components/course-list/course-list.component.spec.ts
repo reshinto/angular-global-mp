@@ -58,8 +58,10 @@ describe("CourseListComponent", () => {
   });
 
   it("should test for editCourse console output", () => {
-    console.log = jasmine.createSpy("log");
-    component.editCourse(courseProps);
-    expect(console.log).toHaveBeenCalled();
+    const id = 1;
+    spyOn(component.router, "navigate");
+
+    component.editCourse(id);
+    expect(component.router.navigate).toHaveBeenCalledWith([`/courses/${id}`]);
   });
 });

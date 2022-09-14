@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { CourseService } from "src/app/services/course.service";
 import { Course } from "../course-item/course";
 
@@ -10,13 +11,12 @@ import { Course } from "../course-item/course";
 export class CourseListComponent implements OnInit {
   @Input()
   appInstance: any;
-
   @Input()
   courses!: Course[];
   @Input()
   showLoadMore!: boolean;
 
-  constructor(private courseService: CourseService) {}
+  constructor(private courseService: CourseService, public router: Router) {}
 
   ngOnInit(): void {}
 
@@ -40,7 +40,7 @@ export class CourseListComponent implements OnInit {
     }
   }
 
-  editCourse(course: Course): void {
-    console.log("edit", course);
+  editCourse(id: number): void {
+    this.router.navigate([`/courses/${id}`]);
   }
 }

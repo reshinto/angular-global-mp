@@ -1,6 +1,6 @@
 <div class="course-container">
   <form class="course-form" (ngSubmit)="onSubmit()">
-    <h2 class="course-form_pagetitle">{{ pageTitle }}</h2>
+    <h2 class="course-form_pagetitle">{{ pageTitle | titlecase }} course</h2>
     <div class="course-form_fullwidth">
       <span class="course-form_labelcontainer">
         <label class="course-form_label">Title:</label>

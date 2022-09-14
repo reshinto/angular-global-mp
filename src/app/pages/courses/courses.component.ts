@@ -61,6 +61,6 @@ export class CoursesComponent implements OnInit, DoCheck {
   }
 
   addCourse(): void {
-    this.router.navigate(["/new-course"]);
+    this.router.navigate(["/courses/new"]);
   }
 }
