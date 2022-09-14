@@ -46,8 +46,7 @@
 }
 
 .courseitem-bottom {
-  display: flex;
-  justify-content: space-between;
+  display: inline-flex;
 }
 
 .courseitem-bottom-text {
@@ -58,13 +57,14 @@
   font-family: "SourceSansPro-Regular";
   text-transform: none;
   text-align: left;
+  width: 80%;
 }
 
 .courseitem-bottom-buttons {
-  width: 130px;
-  display: flex;
-  justify-content: flex-end;
+  display: inline-flex;
   margin-left: 35px;
+  height: 25px;
+  gap: 12px;
 }
 
 .courseitem-topratedbg {
