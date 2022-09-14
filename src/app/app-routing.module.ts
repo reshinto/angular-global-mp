@@ -1,8 +1,9 @@
 import { NgModule } from "@angular/core";
-import { RouterModule, Routes } from "@angular/router";
+import { RouteReuseStrategy, RouterModule, Routes } from "@angular/router";
 import { LoginComponent } from "./pages/login/login.component";
 import { NotFoundComponent } from "./pages/not-found/not-found.component";
 import { AuthGuard } from "./guards/auth.guard";
+import { CustomRouteReuseStrategy } from "./services/custom-route-reuse-strategy.service";
 
 const routes: Routes = [
   { path: "", redirectTo: "courses", pathMatch: "full" },
@@ -20,6 +21,9 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule],
-  providers: [AuthGuard],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: CustomRouteReuseStrategy },
+    AuthGuard,
+  ],
 })
 export class AppRoutingModule {}
