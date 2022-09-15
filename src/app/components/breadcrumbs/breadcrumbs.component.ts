@@ -1,11 +1,9 @@
 import { Component, DoCheck, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
-
-type BreadcrumbLinks = {
-  name: string;
-  path: string;
-};
+import { CourseService } from "src/app/services/course.service";
+import { Course } from "../course-item/course";
+import { BreadcrumbLinks, BreadcrumbMap } from "./breadcrumbs";
 
 const coursesPath: BreadcrumbLinks = {
   name: "courses",
@@ -14,17 +12,13 @@ const coursesPath: BreadcrumbLinks = {
 
 const newCoursePath: BreadcrumbLinks = {
   name: "new course",
-  path: "/new-course",
-};
-
-type BreadcrumbMap = {
-  [k: string]: [] | BreadcrumbLinks[];
+  path: "/courses/new",
 };
 
 const BREADCRUMBS: BreadcrumbMap = {
   "/": [],
   "/courses": [coursesPath],
-  "/new-course": [coursesPath, newCoursePath],
+  "/courses/new": [coursesPath, newCoursePath],
 };
 
 @Component({
@@ -36,15 +30,44 @@ export class BreadcrumbsComponent implements OnInit, DoCheck {
   breadcrumbs!: BreadcrumbLinks[];
   isAuthenticated: boolean = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private courseService: CourseService,
+    public router: Router,
+    private route: ActivatedRoute,
+  ) {}
 
   ngOnInit(): void {
     this.isAuthenticated = this.authService.isAuthenticated;
     this.breadcrumbs = BREADCRUMBS[this.router.url] as BreadcrumbLinks[];
+    this.configureEditCourseBreadcrumb();
   }
 
   ngDoCheck(): void {
     this.isAuthenticated = this.authService.isAuthenticated;
     this.breadcrumbs = BREADCRUMBS[this.router.url] as BreadcrumbLinks[];
+    this.configureEditCourseBreadcrumb();
+  }
+
+  editCoursePath(name: string, path: string): BreadcrumbLinks {
+    return {
+      name,
+      path,
+    };
+  }
+
+  configureEditCourseBreadcrumb(): void {
+    if (this.isAuthenticated && !this.breadcrumbs) {
+      const id = this.route.snapshot.firstChild?.children[0].params["id"];
+      if (id) {
+        const course: Course = this.courseService.getCourse(Number(id));
+        if (course) {
+          this.breadcrumbs = [
+            coursesPath,
+            this.editCoursePath(course.title, `/courses/${id}`),
+          ];
+        }
+      }
+    }
   }
 }

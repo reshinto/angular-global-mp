@@ -73,6 +73,6 @@ describe("CoursesComponent", () => {
     spyOn(component.router, "navigate");
 
     component.addCourse();
-    expect(component.router.navigate).toHaveBeenCalledWith(["/new-course"]);
+    expect(component.router.navigate).toHaveBeenCalledWith(["/courses/new"]);
   });
 });

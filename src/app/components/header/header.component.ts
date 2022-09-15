@@ -1,4 +1,5 @@
 import { Component, DoCheck, OnInit } from "@angular/core";
+import { Router } from "@angular/router";
 import { AuthService } from "src/app/services/auth.service";
 
 @Component({
@@ -10,7 +11,7 @@ export class HeaderComponent implements OnInit, DoCheck {
   title: string = "video course";
   isAuthenticated: boolean = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, public router: Router) {}
 
   ngOnInit(): void {
     this.isAuthenticated = this.authService.isAuthenticated;
@@ -18,5 +19,10 @@ export class HeaderComponent implements OnInit, DoCheck {
 
   ngDoCheck(): void {
     this.isAuthenticated = this.authService.isAuthenticated;
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.router.navigate(["/login"]);
   }
 }

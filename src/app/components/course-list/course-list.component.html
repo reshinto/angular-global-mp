@@ -4,7 +4,7 @@
   <app-course-item
     [course]="course"
     (onDeleteCourse)="deleteCourse(course)"
-    (onEditCourse)="editCourse(course)"></app-course-item>
+    (onEditCourse)="editCourse(course.id)"></app-course-item>
 </div>
 <div *ngIf="showLoadMore" class="courselist-itemcontainer">
   <a class="courselist-itemcontainer_loadmoretext" (click)="loadMoreCourses()"

@@ -20,6 +20,7 @@ import { OrderbyPipe } from "./pipes/orderby.pipe";
 import { FilterbyPipe } from "./pipes/filterby.pipe";
 import { LoginComponent } from "./pages/login/login.component";
 import { CourseComponent } from "./pages/course/course.component";
+import { NotFoundComponent } from "./pages/not-found/not-found.component";
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { CourseComponent } from "./pages/course/course.component";
     FilterbyPipe,
     LoginComponent,
     CourseComponent,
+    NotFoundComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, FontAwesomeModule],
   providers: [],
