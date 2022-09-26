@@ -2,6 +2,7 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
+import { HttpClientModule } from "@angular/common/http";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -21,6 +22,7 @@ import { FilterbyPipe } from "./pipes/filterby.pipe";
 import { LoginComponent } from "./pages/login/login.component";
 import { CourseComponent } from "./pages/course/course.component";
 import { NotFoundComponent } from "./pages/not-found/not-found.component";
+import { AuthService } from "./services/auth.service";
 
 @NgModule({
   declarations: [
@@ -42,8 +44,14 @@ import { NotFoundComponent } from "./pages/not-found/not-found.component";
     CourseComponent,
     NotFoundComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, FormsModule, FontAwesomeModule],
-  providers: [],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    FontAwesomeModule,
+    HttpClientModule,
+  ],
+  providers: [AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
