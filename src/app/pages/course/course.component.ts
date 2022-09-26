@@ -26,7 +26,7 @@ export class CourseComponent implements OnInit {
   date!: string;
   @Input()
   authors!: string;
-  courseId?: number;
+  courseId!: number;
   isNew: boolean = true;
 
   constructor(
@@ -36,7 +36,7 @@ export class CourseComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.route.paramMap.subscribe((params: ParamMap) => {
+    this.route.paramMap.subscribe(async (params: ParamMap) => {
       this.handleParams(params);
     });
     this.updatePageTitle();
@@ -48,14 +48,13 @@ export class CourseComponent implements OnInit {
 
   populateCourse(course: Course | undefined): void {
     if (course) {
-      this.title = course.title;
+      this.title = course.name;
       this.description = course.description;
-      this.duration = course.duration;
-      const year = course.creationDate.getFullYear();
-      const month = this.formatDayMonth(
-        String(course.creationDate.getMonth() + 1),
-      );
-      const day = this.formatDayMonth(String(course.creationDate.getDate()));
+      this.duration = course.length;
+      const currentDate = new Date(course.date);
+      const year = currentDate.getFullYear();
+      const month = this.formatDayMonth(String(currentDate.getMonth() + 1));
+      const day = this.formatDayMonth(String(currentDate.getDate()));
       this.date = `${year}-${month}-${day}`;
       this.isNew = false;
     } else {
@@ -63,13 +62,15 @@ export class CourseComponent implements OnInit {
     }
   }
 
-  handleParams(params: ParamMap): void {
+  handleParams(params: ParamMap) {
     const id = params.get("id") as string;
     this.isNew = true;
     if (!isNaN(Number(id))) {
       this.courseId = Number(id);
-      const course: Course = this.courseService.getCourse(Number(id));
-      this.populateCourse(course);
+      this.courseService.getCourse(Number(id)).subscribe((course: Course) => {
+        this.populateCourse(course);
+        this.isNew = false;
+      });
     } else if (id !== "new") {
       this.router.navigate(["404"]);
     }
@@ -88,17 +89,17 @@ export class CourseComponent implements OnInit {
 
   onSubmit(): void {
     const newCourse: Course = {
-      id: this.courseId ? this.courseId : 0,
-      title: this.title,
-      creationDate: new Date(this.date),
-      duration: this.duration,
+      name: this.title,
+      date: new Date(this.date),
+      length: this.duration,
       description: this.description,
-      topRated: false,
+      isTopRated: false,
     };
     if (this.isNew) {
-      this.courseService.createCourse(newCourse);
+      this.courseService.createCourse(newCourse).subscribe();
     } else {
-      this.courseService.updateCourse(newCourse);
+      const updatedCourse = { ...newCourse, id: this.courseId };
+      this.courseService.updateCourse(updatedCourse).subscribe();
     }
     this.router.navigate(["/courses"]);
   }

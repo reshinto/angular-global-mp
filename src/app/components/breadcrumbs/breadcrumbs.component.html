@@ -8,7 +8,7 @@
       [ngClass]="
         index === breadcrumbs.length - 1 ? 'breadcrumb-link_focus' : ''
       "
-      routerLink="{{ breadcrumb.path }}"
+      (click)="handleClick(breadcrumb.path)"
       >{{ breadcrumb.name | titlecase }}</a
     >
   </div>

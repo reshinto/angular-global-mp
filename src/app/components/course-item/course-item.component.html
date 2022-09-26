@@ -1,13 +1,13 @@
 <div
   appCourseborder
-  [creationDate]="course.creationDate"
-  [ngClass]="course.topRated ? 'courseitem-topratedbg' : ''"
+  [creationDate]="course.date"
+  [ngClass]="course.isTopRated ? 'courseitem-topratedbg' : ''"
   class="courseitem-container">
   <section class="courseitem-top">
     <h2 class="courseitem-top_title">
-      {{ course.title | titlecase }}
+      {{ course.name | titlecase }}
       <app-logo
-        *ngIf="course.topRated"
+        *ngIf="course.isTopRated"
         iconName="faStar"
         [ngStyle]="{ 'color': 'orange', 'margin-left': '10px' }"></app-logo>
     </h2>
@@ -15,13 +15,13 @@
       <span class="courseitem-top-datetime_section">
         <app-logo iconName="faClock"></app-logo>
         <p class="courseitem-top-datetime_text">
-          {{ course.duration | duration }}
+          {{ course.length | duration }}
         </p>
       </span>
       <span class="courseitem-top-datetime_section">
         <app-logo iconName="faCalendar"></app-logo>
         <p class="courseitem-top-datetime_text">
-          {{ course.creationDate | date: "dd MMM, yyyy" }}
+          {{ course.date | date: "dd MMM, yyyy" }}
         </p>
       </span>
     </div>

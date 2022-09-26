@@ -6,21 +6,21 @@ d2.setFullYear(2022, 7, 10);
 const courses = [
   {
     id: 1,
-    title: "video course 1. name tag",
-    creationDate: d2,
-    duration: 15,
+    name: "video course 1. name tag",
+    date: d2,
+    length: 15,
     description:
       "Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.",
-    topRated: false,
+    isTopRated: false,
   },
   {
     id: 2,
-    title: "video course 2. name tag",
-    creationDate: d2,
-    duration: 15,
+    name: "video course 2. name tag",
+    date: d2,
+    length: 15,
     description:
       "Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.",
-    topRated: false,
+    isTopRated: false,
   },
 ];
 
@@ -51,12 +51,12 @@ describe("FilterbyPipe", () => {
     const result = [
       {
         id: 2,
-        title: "video course 2. name tag",
-        creationDate: d2,
-        duration: 15,
+        name: "video course 2. name tag",
+        date: d2,
+        length: 15,
         description:
           "Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.",
-        topRated: false,
+        isTopRated: false,
       },
     ];
     expect(pipe.transform(courses, input)).toEqual(result);
