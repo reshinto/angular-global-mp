@@ -10,6 +10,7 @@ import { AuthService } from "src/app/services/auth.service";
 export class HeaderComponent implements OnInit, DoCheck {
   title: string = "video course";
   isAuthenticated: boolean = false;
+  user: string = "User login";
 
   constructor(private authService: AuthService, public router: Router) {}
 
@@ -19,6 +20,7 @@ export class HeaderComponent implements OnInit, DoCheck {
 
   ngDoCheck(): void {
     this.isAuthenticated = this.authService.isAuthenticated;
+    this.user = `${this.authService.user.first} ${this.authService.user.last}`;
   }
 
   logout(): void {
