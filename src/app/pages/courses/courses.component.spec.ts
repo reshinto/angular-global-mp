@@ -46,23 +46,6 @@ xdescribe("CoursesComponent", () => {
     expect(component).toBeTruthy();
   });
 
-  it("should filter and return 1 course", () => {
-    const result = [
-      {
-        id: 1,
-        name: "video course 1. name tag",
-        date: d1,
-        length: 88,
-        description:
-          "Learn about where you can find course descriptions, what information they include, how they work, and details about various components of a course description. Course descriptions report information about a university or college's classes. They're published both in course catalogs that outline degree requirements and in course schedules that contain descriptions for all courses offered during a particular semester.",
-        isTopRated: true,
-      },
-    ];
-    component.filterCourses("1");
-    expect(component.numOfDisplay).toBe(3);
-    expect(component.courses[0].id).toEqual(result[0].id);
-  });
-
   it("should trigger ngDoCheck", () => {
     component.updated = true;
     fixture.detectChanges();

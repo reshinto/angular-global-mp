@@ -1,5 +1,11 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
-import { Course } from "../course-item/course";
+import { Component, Input, OnInit, Output } from "@angular/core";
+import {
+  debounceTime,
+  distinctUntilChanged,
+  Subject,
+  Subscription,
+} from "rxjs";
+import { CourseService } from "src/app/services/course.service";
 
 @Component({
   selector: "app-search",
@@ -7,19 +13,35 @@ import { Course } from "../course-item/course";
   styleUrls: ["./search.component.css"],
 })
 export class SearchComponent implements OnInit {
-  @Output()
-  // eslint-disable-next-line @angular-eslint/no-output-on-prefix
-  onFilterCourse: EventEmitter<string> = new EventEmitter();
   @Input()
-  courses!: Course[];
+  appInstance: any;
   text!: string;
+  private subjectKeyUp = new Subject<any>();
+  courses$!: Subscription;
 
-  constructor() {}
+  constructor(private courseService: CourseService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.subjectKeyUp
+      .pipe(debounceTime(700), distinctUntilChanged())
+      .subscribe(value => this.handleSearch(value));
+  }
 
-  onSubmit(): void {
-    this.onFilterCourse.emit(this.text);
-    this.text = "";
+  onSearch($event: any): void {
+    const value = $event.target.value;
+    if (value.length >= 3) {
+      this.subjectKeyUp.next(value);
+    }
+  }
+
+  handleSearch(text: string): void {
+    this.courses$ = this.courseService
+      .filterCourses(text)
+      .subscribe(response => {
+        if (Array.isArray(response)) {
+          this.appInstance.courses = response;
+          this.appInstance.resetDefault();
+        }
+      });
   }
 }

@@ -1,8 +1,6 @@
 <div class="coursespage-container">
   <div class="coursespage-section">
-    <app-search
-      (onFilterCourse)="filterCourses($event)"
-      [courses]="courses"></app-search>
+    <app-search [appInstance]="this"></app-search>
     <app-button
       (onCustomClick)="addCourse()"
       btnStyle="coursespage-button"
