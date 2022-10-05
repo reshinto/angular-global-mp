@@ -2,7 +2,7 @@ import { NgModule } from "@angular/core";
 import { BrowserModule } from "@angular/platform-browser";
 import { FormsModule } from "@angular/forms";
 import { FontAwesomeModule } from "@fortawesome/angular-fontawesome";
-import { HttpClientModule } from "@angular/common/http";
+import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
@@ -23,6 +23,8 @@ import { LoginComponent } from "./pages/login/login.component";
 import { CourseComponent } from "./pages/course/course.component";
 import { NotFoundComponent } from "./pages/not-found/not-found.component";
 import { AuthService } from "./services/auth.service";
+import { SpinnerComponent } from "./components/spinner/spinner.component";
+import { LoadingInterceptor } from "./interceptors/loading.interceptor";
 
 @NgModule({
   declarations: [
@@ -43,6 +45,7 @@ import { AuthService } from "./services/auth.service";
     LoginComponent,
     CourseComponent,
     NotFoundComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -51,7 +54,14 @@ import { AuthService } from "./services/auth.service";
     FontAwesomeModule,
     HttpClientModule,
   ],
-  providers: [AuthService],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: LoadingInterceptor,
+      multi: true,
+    },
+    AuthService,
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
