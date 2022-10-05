@@ -1,6 +1,5 @@
 import { Component, DoCheck, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { Observable } from "rxjs";
 import { Course } from "src/app/components/course-item/course";
 import { CourseService } from "src/app/services/course.service";
 
@@ -40,16 +39,6 @@ export class CoursesComponent implements OnInit, DoCheck {
     });
   }
 
-  filterCourses(text: string) {
-    this.courseService.filterCourses(text).subscribe(response => {
-      if (Array.isArray(response)) {
-        this.courses = response;
-        this.numOfDisplay = 3;
-        this.showLoadMore = false;
-      }
-    });
-  }
-
   limitCourses(): void {
     this.courseService.loadCourses(3).subscribe(response => {
       if (Array.isArray(response)) {
@@ -58,6 +47,11 @@ export class CoursesComponent implements OnInit, DoCheck {
           this.courseService.courseLength > this.courses.length;
       }
     });
+  }
+
+  resetDefault(): void {
+    this.numOfDisplay = 3;
+    this.showLoadMore = false;
   }
 
   addCourse(): void {
