@@ -25,9 +25,10 @@ import { NotFoundComponent } from "./pages/not-found/not-found.component";
 import { AuthService } from "./services/auth.service";
 import { SpinnerComponent } from "./components/spinner/spinner.component";
 import { LoadingInterceptor } from "./interceptors/loading.interceptor";
-import { StoreModule } from "@ngrx/store";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { environment } from "../environments/environment";
+import { StoreModule } from "@ngrx/store";
+import { reducers, metaReducers } from "./reducers";
 
 @NgModule({
   declarations: [
@@ -56,7 +57,7 @@ import { environment } from "../environments/environment";
     FormsModule,
     FontAwesomeModule,
     HttpClientModule,
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot(reducers, { metaReducers }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
