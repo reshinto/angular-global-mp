@@ -25,6 +25,7 @@ import { NotFoundComponent } from "./pages/not-found/not-found.component";
 import { AuthService } from "./services/auth.service";
 import { SpinnerComponent } from "./components/spinner/spinner.component";
 import { LoadingInterceptor } from "./interceptors/loading.interceptor";
+import { StoreModule } from "@ngrx/store";
 
 @NgModule({
   declarations: [
@@ -53,6 +54,7 @@ import { LoadingInterceptor } from "./interceptors/loading.interceptor";
     FormsModule,
     FontAwesomeModule,
     HttpClientModule,
+    StoreModule.forRoot({}, {}),
   ],
   providers: [
     {
