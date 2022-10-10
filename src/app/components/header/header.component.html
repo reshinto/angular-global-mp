@@ -3,10 +3,10 @@
     <app-logo iconName="faCirclePlay" size="2xl"></app-logo>
     <h1 class="header-title">{{ title | uppercase }}</h1>
   </div>
-  <div *ngIf="isAuthenticated" class="header-container">
+  <div *ngIf="isAuthenticated$ | async" class="header-container">
     <app-button
       class="header-button"
-      text="{{ user }}"
+      text="{{ user$ | async }}"
       iconName="faUser"></app-button>
     <app-button
       class="header-button"

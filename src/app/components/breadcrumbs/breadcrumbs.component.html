@@ -1,4 +1,4 @@
-<div *ngIf="isAuthenticated" class="breadcrumbs-container">
+<div *ngIf="isAuthenticated$ | async" class="breadcrumbs-container">
   <div
     class="breadcrumb-linkcontainer"
     *ngFor="let breadcrumb of breadcrumbs; let index = index">
@@ -13,4 +13,6 @@
     >
   </div>
 </div>
-<div *ngIf="!isAuthenticated" class="breadcrumbs-hidden"></div>
+<div
+  *ngIf="(isAuthenticated$ | async) === false"
+  class="breadcrumbs-hidden"></div>

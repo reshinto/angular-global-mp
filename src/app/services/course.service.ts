@@ -2,7 +2,6 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { Course } from "../components/course-item/course";
-import { AuthService } from "./auth.service";
 import { DEFAULT_HTTP_OPTIONS, get_url, ROUTES, SERVICES } from "./constants";
 
 const DEFAULT_COURSES: Course[] = [
@@ -23,7 +22,7 @@ export class CourseService {
   courseLength!: number;
   coursesDisplayCount: number = 0;
 
-  constructor(private http: HttpClient, private authService: AuthService) {
+  constructor(private http: HttpClient) {
     this.calculateCourseLength();
   }
 
@@ -31,7 +30,7 @@ export class CourseService {
     return {
       headers: new HttpHeaders({
         ...DEFAULT_HTTP_OPTIONS,
-        Authorization: `Bearer ${this.authService.token}`,
+        Authorization: `Bearer ${sessionStorage.getItem("token")}`,
       }),
     };
   }

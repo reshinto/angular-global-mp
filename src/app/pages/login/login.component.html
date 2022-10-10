@@ -2,7 +2,9 @@
   <form class="login-form" (ngSubmit)="onSubmit()">
     <span class="login-form_headercontainer">
       <h2 class="login-form_title">Login</h2>
-      <p *ngIf="hasError" class="login-form_error">Wrong e-mail or password</p>
+      <p *ngIf="hasError$ | async" class="login-form_error">
+        Wrong e-mail or password
+      </p>
     </span>
     <span class="login-form_labelcontainer">
       <label class="login-form_label">E-mail:</label>

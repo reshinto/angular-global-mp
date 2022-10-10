@@ -28,7 +28,9 @@ import { LoadingInterceptor } from "./interceptors/loading.interceptor";
 import { StoreDevtoolsModule } from "@ngrx/store-devtools";
 import { environment } from "../environments/environment";
 import { StoreModule } from "@ngrx/store";
-import { reducers, metaReducers } from "./reducers";
+import { reducers, metaReducers } from "./redux/reducers";
+import { EffectsModule } from "@ngrx/effects";
+import { effects } from "./redux/effects";
 
 @NgModule({
   declarations: [
@@ -62,6 +64,7 @@ import { reducers, metaReducers } from "./reducers";
       maxAge: 25,
       logOnly: environment.production,
     }),
+    EffectsModule.forRoot(effects),
   ],
   providers: [
     {
