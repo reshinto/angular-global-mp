@@ -25,6 +25,12 @@ import { NotFoundComponent } from "./pages/not-found/not-found.component";
 import { AuthService } from "./services/auth.service";
 import { SpinnerComponent } from "./components/spinner/spinner.component";
 import { LoadingInterceptor } from "./interceptors/loading.interceptor";
+import { StoreDevtoolsModule } from "@ngrx/store-devtools";
+import { environment } from "../environments/environment";
+import { StoreModule } from "@ngrx/store";
+import { reducers, metaReducers } from "./redux/reducers";
+import { EffectsModule } from "@ngrx/effects";
+import { effects } from "./redux/effects";
 
 @NgModule({
   declarations: [
@@ -53,6 +59,12 @@ import { LoadingInterceptor } from "./interceptors/loading.interceptor";
     FormsModule,
     FontAwesomeModule,
     HttpClientModule,
+    StoreModule.forRoot(reducers, { metaReducers }),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25,
+      logOnly: environment.production,
+    }),
+    EffectsModule.forRoot(effects),
   ],
   providers: [
     {

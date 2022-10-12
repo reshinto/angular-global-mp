@@ -10,6 +10,6 @@
   </div>
   <app-course-list
     [appInstance]="this"
-    [courses]="courses"
-    [showLoadMore]="showLoadMore"></app-course-list>
+    [courses]="(courses$ | async) || []"
+    [showLoadMore]="(showLoadMore$ | async) === true"></app-course-list>
 </div>

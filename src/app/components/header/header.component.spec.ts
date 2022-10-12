@@ -19,11 +19,4 @@ xdescribe("HeaderComponent", () => {
   it("should create", () => {
     expect(component).toBeTruthy();
   });
-
-  it("should handle logout", () => {
-    spyOn(component.router, "navigate");
-
-    component.logout();
-    expect(component.router.navigate).toHaveBeenCalledWith(["/login"]);
-  });
 });

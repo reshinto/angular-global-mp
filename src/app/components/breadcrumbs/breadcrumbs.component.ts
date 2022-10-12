@@ -1,6 +1,8 @@
 import { Component, DoCheck, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
-import { AuthService } from "src/app/services/auth.service";
+import { Router } from "@angular/router";
+import { Store } from "@ngrx/store";
+import { State } from "src/app/redux/reducers";
+import { selectIsAuthenticated } from "src/app/redux/selectors/auth.selectors";
 import { BreadcrumbLinks, BreadcrumbMap } from "./breadcrumbs";
 
 const coursesPath: BreadcrumbLinks = {
@@ -26,23 +28,20 @@ const BREADCRUMBS: BreadcrumbMap = {
 })
 export class BreadcrumbsComponent implements OnInit, DoCheck {
   breadcrumbs!: BreadcrumbLinks[];
-  isAuthenticated: boolean = false;
-  isUpdated: boolean = false;
+  isAuthenticated$ = this.store.select(selectIsAuthenticated);
 
   constructor(
-    private authService: AuthService,
     public router: Router,
-    private route: ActivatedRoute,
+    // eslint-disable-next-line @ngrx/no-typed-global-store
+    private store: Store<State>,
   ) {}
 
   ngOnInit() {
-    this.isAuthenticated = this.authService.isAuthenticated;
     this.breadcrumbs = BREADCRUMBS[this.router.url] as BreadcrumbLinks[];
     this.configureEditCourseBreadcrumb();
   }
 
   ngDoCheck(): void {
-    this.isAuthenticated = this.authService.isAuthenticated;
     const breadcrumbs = BREADCRUMBS[this.router.url] as BreadcrumbLinks[];
     if (JSON.stringify(breadcrumbs) !== JSON.stringify(this.breadcrumbs)) {
       this.breadcrumbs = breadcrumbs;
@@ -58,14 +57,19 @@ export class BreadcrumbsComponent implements OnInit, DoCheck {
   }
 
   configureEditCourseBreadcrumb() {
-    if (this.isAuthenticated && !this.breadcrumbs) {
-      const id = this.route.snapshot.firstChild?.children[0].params["id"];
-      const name = this.route.snapshot.firstChild?.children[0].params["name"];
+    if (!this.breadcrumbs) {
+      const course = JSON.parse(sessionStorage.getItem("temp") || "");
+      const id = course?.id;
+      const name = course?.name;
+
       if (id) {
         this.breadcrumbs = [
           coursesPath,
           this.editCoursePath(name, `/courses/${id}`),
         ];
+      }
+      if (this.router.url === "/login") {
+        this.breadcrumbs = [];
       }
     }
   }

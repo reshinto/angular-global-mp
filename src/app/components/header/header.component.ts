@@ -1,30 +1,26 @@
-import { Component, DoCheck, OnInit } from "@angular/core";
-import { Router } from "@angular/router";
-import { AuthService } from "src/app/services/auth.service";
+import { Component } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { logout } from "src/app/redux/actions/auth.actions";
+import { State } from "src/app/redux/reducers";
+import {
+  selectIsAuthenticated,
+  selectUser,
+} from "src/app/redux/selectors/auth.selectors";
 
 @Component({
   selector: "app-header",
   templateUrl: "./header.component.html",
   styleUrls: ["./header.component.css"],
 })
-export class HeaderComponent implements OnInit, DoCheck {
+export class HeaderComponent {
   title: string = "video course";
-  isAuthenticated: boolean = false;
-  user: string = "User login";
+  user$ = this.store.select(selectUser);
+  isAuthenticated$ = this.store.select(selectIsAuthenticated);
 
-  constructor(private authService: AuthService, public router: Router) {}
-
-  ngOnInit(): void {
-    this.isAuthenticated = this.authService.isAuthenticated;
-  }
-
-  ngDoCheck(): void {
-    this.isAuthenticated = this.authService.isAuthenticated;
-    this.user = `${this.authService.user.first} ${this.authService.user.last}`;
-  }
+  // eslint-disable-next-line @ngrx/no-typed-global-store
+  constructor(private store: Store<State>) {}
 
   logout(): void {
-    this.authService.logout();
-    this.router.navigate(["/login"]);
+    this.store.dispatch(logout());
   }
 }

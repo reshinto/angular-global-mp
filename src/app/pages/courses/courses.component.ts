@@ -1,7 +1,12 @@
 import { Component, DoCheck, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { Course } from "src/app/components/course-item/course";
-import { CourseService } from "src/app/services/course.service";
+import { Store } from "@ngrx/store";
+import { getCourses } from "src/app/redux/actions/course.actions";
+import { State } from "src/app/redux/reducers";
+import {
+  selectCourses,
+  selectShowLoadMore,
+} from "src/app/redux/selectors/course.selectors";
 
 @Component({
   selector: "app-courses",
@@ -9,49 +14,25 @@ import { CourseService } from "src/app/services/course.service";
   styleUrls: ["./courses.component.css"],
 })
 export class CoursesComponent implements OnInit, DoCheck {
-  courses!: Course[];
-  originalCourses!: Course[];
-  numOfDisplay: number = 3;
-  showLoadMore!: boolean;
+  courses$ = this.store.select(selectCourses);
+  showLoadMore$ = this.store.select(selectShowLoadMore);
   updated: boolean = false;
 
-  constructor(private courseService: CourseService, public router: Router) {
-    this.numOfDisplay = 3;
-  }
+  constructor(
+    public router: Router,
+    // eslint-disable-next-line @ngrx/no-typed-global-store
+    private store: Store<State>,
+  ) {}
 
   ngOnInit(): void {
-    this.formatDisplay();
+    this.store.dispatch(getCourses({ usePagination: false }));
   }
 
   ngDoCheck(): void {
     if (this.updated) {
-      this.formatDisplay();
+      this.store.dispatch(getCourses({ usePagination: false }));
       this.updated = false;
     }
-  }
-
-  formatDisplay(): void {
-    this.courseService.getCourses().subscribe(response => {
-      if (Array.isArray(response)) {
-        this.courses = response;
-        this.showLoadMore = this.courseService.courseLength > this.numOfDisplay;
-      }
-    });
-  }
-
-  limitCourses(): void {
-    this.courseService.loadCourses(3).subscribe(response => {
-      if (Array.isArray(response)) {
-        this.courses = [...this.courses, ...response];
-        this.showLoadMore =
-          this.courseService.courseLength > this.courses.length;
-      }
-    });
-  }
-
-  resetDefault(): void {
-    this.numOfDisplay = 3;
-    this.showLoadMore = false;
   }
 
   addCourse(): void {
