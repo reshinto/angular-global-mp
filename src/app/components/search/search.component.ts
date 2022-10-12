@@ -1,11 +1,11 @@
-import { Component, Input, OnInit, Output } from "@angular/core";
+import { Component, Input, OnInit } from "@angular/core";
+import { Store } from "@ngrx/store";
+import { debounceTime, distinctUntilChanged, Subject } from "rxjs";
 import {
-  debounceTime,
-  distinctUntilChanged,
-  Subject,
-  Subscription,
-} from "rxjs";
-import { CourseService } from "src/app/services/course.service";
+  getCourses,
+  searchCourses,
+} from "src/app/redux/actions/course.actions";
+import { State } from "src/app/redux/reducers";
 
 @Component({
   selector: "app-search",
@@ -17,9 +17,11 @@ export class SearchComponent implements OnInit {
   appInstance: any;
   text!: string;
   private subjectKeyUp = new Subject<any>();
-  courses$!: Subscription;
 
-  constructor(private courseService: CourseService) {}
+  constructor(
+    // eslint-disable-next-line @ngrx/no-typed-global-store
+    private store: Store<State>,
+  ) {}
 
   ngOnInit(): void {
     this.subjectKeyUp
@@ -31,17 +33,14 @@ export class SearchComponent implements OnInit {
     const value = $event.target.value;
     if (value.length >= 3) {
       this.subjectKeyUp.next(value);
+    } else if (!value.length) {
+      this.store.dispatch(getCourses({}));
     }
   }
 
   handleSearch(text: string): void {
-    this.courses$ = this.courseService
-      .filterCourses(text)
-      .subscribe(response => {
-        if (Array.isArray(response)) {
-          this.appInstance.courses = response;
-          this.appInstance.resetDefault();
-        }
-      });
+    if (this.text) {
+      this.store.dispatch(searchCourses({ text }));
+    }
   }
 }

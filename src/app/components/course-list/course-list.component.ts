@@ -1,6 +1,11 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { CourseService } from "src/app/services/course.service";
+import { Store } from "@ngrx/store";
+import {
+  deleteCourse,
+  loadCourses,
+} from "src/app/redux/actions/course.actions";
+import { State } from "src/app/redux/reducers";
 import { Course } from "../course-item/course";
 
 @Component({
@@ -16,7 +21,11 @@ export class CourseListComponent implements OnInit {
   @Input()
   showLoadMore!: boolean;
 
-  constructor(private courseService: CourseService, public router: Router) {}
+  constructor(
+    public router: Router,
+    // eslint-disable-next-line @ngrx/no-typed-global-store
+    private store: Store<State>,
+  ) {}
 
   ngOnInit(): void {}
 
@@ -25,22 +34,21 @@ export class CourseListComponent implements OnInit {
   }
 
   loadMoreCourses(): void {
-    this.appInstance.numOfDisplay += 3;
-    this.appInstance.limitCourses();
+    this.store.dispatch(loadCourses({ start: 3 }));
   }
 
-  deleteCourse(course: Course): void {
+  deleteCourse(courseId: number): void {
     const confirmation = window.confirm(
       "Do you really want to delete this course?",
     );
     if (confirmation) {
-      this.courseService.removeCourse(course).subscribe();
+      this.store.dispatch(deleteCourse({ id: courseId }));
       this.appInstance.updated = true;
-      console.log("delete", course);
     }
   }
 
-  editCourse(id?: number, name?: string): void {
-    this.router.navigate([`/courses/${id}`, { name }]);
+  editCourse(course: Course): void {
+    sessionStorage.setItem("temp", JSON.stringify(course));
+    this.router.navigate([`/courses/${course.id}`]);
   }
 }

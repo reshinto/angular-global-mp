@@ -3,8 +3,8 @@
   class="courselist-container">
   <app-course-item
     [course]="course"
-    (onDeleteCourse)="deleteCourse(course)"
-    (onEditCourse)="editCourse(course.id, course.name)"></app-course-item>
+    (onDeleteCourse)="deleteCourse(course.id || 0)"
+    (onEditCourse)="editCourse(course)"></app-course-item>
 </div>
 <div *ngIf="showLoadMore" class="courselist-itemcontainer">
   <a class="courselist-itemcontainer_loadmoretext" (click)="loadMoreCourses()"

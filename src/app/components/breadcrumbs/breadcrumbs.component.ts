@@ -1,5 +1,5 @@
 import { Component, DoCheck, OnInit } from "@angular/core";
-import { ActivatedRoute, Router } from "@angular/router";
+import { Router } from "@angular/router";
 import { Store } from "@ngrx/store";
 import { State } from "src/app/redux/reducers";
 import { selectIsAuthenticated } from "src/app/redux/selectors/auth.selectors";
@@ -32,7 +32,6 @@ export class BreadcrumbsComponent implements OnInit, DoCheck {
 
   constructor(
     public router: Router,
-    private route: ActivatedRoute,
     // eslint-disable-next-line @ngrx/no-typed-global-store
     private store: Store<State>,
   ) {}
@@ -59,9 +58,10 @@ export class BreadcrumbsComponent implements OnInit, DoCheck {
 
   configureEditCourseBreadcrumb() {
     if (!this.breadcrumbs) {
-      const id = this.route.snapshot.firstChild?.children?.[0]?.params["id"];
-      const name =
-        this.route.snapshot.firstChild?.children?.[0]?.params["name"];
+      const course = JSON.parse(sessionStorage.getItem("temp") || "");
+      const id = course?.id;
+      const name = course?.name;
+
       if (id) {
         this.breadcrumbs = [
           coursesPath,

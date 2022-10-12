@@ -26,36 +26,3 @@ const courses = [
     isTopRated: false,
   },
 ];
-
-xdescribe("CoursesComponent", () => {
-  let component: CoursesComponent;
-  let fixture: ComponentFixture<CoursesComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [CoursesComponent],
-    }).compileComponents();
-
-    fixture = TestBed.createComponent(CoursesComponent);
-    component = fixture.componentInstance;
-    component.courses = courses;
-    fixture.detectChanges();
-  });
-
-  it("should create", () => {
-    expect(component).toBeTruthy();
-  });
-
-  it("should trigger ngDoCheck", () => {
-    component.updated = true;
-    fixture.detectChanges();
-    expect(component.updated).toBe(false);
-  });
-
-  it("should navigate to new-course page", () => {
-    spyOn(component.router, "navigate");
-
-    component.addCourse();
-    expect(component.router.navigate).toHaveBeenCalledWith(["/courses/new"]);
-  });
-});

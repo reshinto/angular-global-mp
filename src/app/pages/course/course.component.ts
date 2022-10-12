@@ -1,7 +1,9 @@
 import { Component, Input, OnInit } from "@angular/core";
 import { ActivatedRoute, ParamMap, Router } from "@angular/router";
+import { Store } from "@ngrx/store";
 import { Course } from "src/app/components/course-item/course";
-import { CourseService } from "src/app/services/course.service";
+import { addCourse, editCourse } from "src/app/redux/actions/course.actions";
+import { State } from "src/app/redux/reducers";
 
 const pageTitleMap: {
   [k: string]: string;
@@ -31,8 +33,9 @@ export class CourseComponent implements OnInit {
 
   constructor(
     public router: Router,
-    private courseService: CourseService,
     public route: ActivatedRoute,
+    // eslint-disable-next-line @ngrx/no-typed-global-store
+    private store: Store<State>,
   ) {}
 
   ngOnInit(): void {
@@ -48,7 +51,7 @@ export class CourseComponent implements OnInit {
 
   populateCourse(course: Course | undefined): void {
     if (course) {
-      this.title = course.name;
+      this.title = course?.name;
       this.description = course.description;
       this.duration = course.length;
       const currentDate = new Date(course.date);
@@ -67,10 +70,9 @@ export class CourseComponent implements OnInit {
     this.isNew = true;
     if (!isNaN(Number(id))) {
       this.courseId = Number(id);
-      this.courseService.getCourse(Number(id)).subscribe((course: Course) => {
-        this.populateCourse(course);
-        this.isNew = false;
-      });
+      const course = JSON.parse(sessionStorage.getItem("temp") || "");
+      this.populateCourse(course);
+      this.isNew = false;
     } else if (id !== "new") {
       this.router.navigate(["404"]);
     }
@@ -84,6 +86,7 @@ export class CourseComponent implements OnInit {
   }
 
   cancel(): void {
+    sessionStorage.removeItem("temp");
     this.router.navigate(["/courses"]);
   }
 
@@ -96,10 +99,11 @@ export class CourseComponent implements OnInit {
       isTopRated: false,
     };
     if (this.isNew) {
-      this.courseService.createCourse(newCourse).subscribe();
+      this.store.dispatch(addCourse({ course: newCourse }));
     } else {
       const updatedCourse = { ...newCourse, id: this.courseId };
-      this.courseService.updateCourse(updatedCourse).subscribe();
+      this.store.dispatch(editCourse({ course: updatedCourse }));
+      sessionStorage.removeItem("temp");
     }
     this.router.navigate(["/courses"]);
   }
