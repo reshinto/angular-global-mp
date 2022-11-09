@@ -1,28 +1,12 @@
+import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { User } from "../types";
-
-type Users = {
-  id: number;
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-};
-
-const USERS: Users[] = [
-  {
-    id: 1,
-    firstName: "Terence",
-    lastName: "Kong",
-    email: "test@email.com",
-    password: "password",
-  },
-];
+import { Observable } from "rxjs";
+import { User, UserInfo } from "../types";
+import { get_url, HTTP_OPTIONS, ROUTES, SERVICES } from "./constants";
 
 const DEFAULT_USER: User = {
-  id: 0,
-  firstName: "",
-  lastName: "",
+  first: "",
+  last: "",
 };
 
 @Injectable({
@@ -30,26 +14,21 @@ const DEFAULT_USER: User = {
 })
 export class AuthService {
   user: User = DEFAULT_USER;
-  users: Users[] = USERS;
+  token!: string;
   isAuthenticated: boolean = false;
   hasError: boolean = false;
 
-  constructor() {}
+  constructor(private http: HttpClient) {}
 
-  login(email: string, password: string): void {
-    const user = this.users;
-    if (user.length === 1) {
-      this.user = {
-        id: user[0].id,
-        firstName: user[0].firstName,
-        lastName: user[0].lastName,
-      };
-      this.isAuthenticated = true;
-      this.hasError = false;
-      console.log("logged in successfully");
-    } else {
-      this.hasError = true;
-    }
+  login(email: string, password: string): Observable<{ token: string }> {
+    const body = {
+      login: email,
+      password,
+    };
+    //@ts-ignore
+    const url = get_url(SERVICES.auth, ROUTES.auth.login);
+
+    return this.http.post<{ token: string }>(url, body, HTTP_OPTIONS);
   }
 
   logout(): void {
@@ -57,7 +36,10 @@ export class AuthService {
     this.isAuthenticated = false;
   }
 
-  getUserInfo(): User {
-    return this.user;
+  getUserInfo(): Observable<UserInfo> {
+    //@ts-ignore
+    const url = get_url(SERVICES.auth, ROUTES.auth.userinfo);
+
+    return this.http.post<UserInfo>(url, { token: this.token }, HTTP_OPTIONS);
   }
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from "@angular/core";
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { TestBed } from "@angular/core/testing";
 import { By } from "@angular/platform-browser";
 import { Course } from "../components/course-item/course";
 import { CourseborderDirective } from "./courseborder.directive";
@@ -13,11 +13,11 @@ d1.setFullYear(2022, 8, 10);
 class TestComponent implements OnInit {
   course: Course = {
     id: 1,
-    title: "test",
-    creationDate: d1,
-    duration: 88,
+    name: "test",
+    date: d1,
+    length: 88,
     description: "abc",
-    topRated: false,
+    isTopRated: false,
   };
   ngOnInit(): void {}
 }

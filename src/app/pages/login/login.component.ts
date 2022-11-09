@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
+import { switchMap } from "rxjs";
 import { AuthService } from "src/app/services/auth.service";
 
 @Component({
@@ -16,13 +17,38 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onSubmit(): void {
-    this.authService.login(this.email, this.password);
-    this.hasError = this.authService.hasError;
-    if (!this.hasError) {
-      this.email = "";
-      this.password = "";
-      this.router.navigate(["/courses"]);
-    }
+  onSubmit() {
+    this.authService
+      .login(this.email, this.password)
+      .pipe(
+        switchMap(({ token }) => {
+          this.authService.token = token;
+          this.authService.isAuthenticated = true;
+          this.authService.hasError = false;
+          this.hasError = this.authService.hasError;
+          return this.authService.getUserInfo();
+        }),
+      )
+      .subscribe({
+        next: response => {
+          this.authService.hasError = false;
+          this.hasError = this.authService.hasError;
+          this.authService.user = response.name;
+        },
+        error: error => {
+          console.log("get user error");
+          this.authService.hasError = true;
+          this.hasError = this.authService.hasError;
+          console.log(error);
+        },
+        complete: () => {
+          if (!this.authService.hasError) {
+            this.email = "";
+            this.password = "";
+            this.router.navigate(["/courses"]);
+          }
+          console.log("logged in successfully");
+        },
+      });
   }
 }

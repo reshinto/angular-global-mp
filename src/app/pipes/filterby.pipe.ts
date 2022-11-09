@@ -11,7 +11,7 @@ export class FilterbyPipe implements PipeTransform {
     ...args: unknown[]
   ): Course[] {
     return courses.filter((course: Course) =>
-      course.title.toLowerCase().includes(value.toLowerCase()),
+      course.name.toLowerCase().includes(value.toLowerCase()),
     );
   }
 }

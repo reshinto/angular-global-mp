@@ -34,13 +34,13 @@ export class CourseListComponent implements OnInit {
       "Do you really want to delete this course?",
     );
     if (confirmation) {
-      this.courseService.removeCourse(course);
+      this.courseService.removeCourse(course).subscribe();
       this.appInstance.updated = true;
       console.log("delete", course);
     }
   }
 
-  editCourse(id: number): void {
-    this.router.navigate([`/courses/${id}`]);
+  editCourse(id?: number, name?: string): void {
+    this.router.navigate([`/courses/${id}`, { name }]);
   }
 }
